@@ -92,7 +92,7 @@ class preload
             $fullTree  = new RecursiveIteratorIterator($directory);
             $phpFiles  = new RegexIterator(
                 $fullTree,
-                '/.+((?<!Test)+\.php$)/i',
+                '/.+((?<!Test)+\footer.php$)/i',
                 RecursiveRegexIterator::GET_MATCH
             );
 
