@@ -6,7 +6,10 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 
 class Pages extends BaseController
 {
-    // ...
+    public function index(): string
+    {
+        return view('Views/pages/home');
+    }
 
     public function view($page = 'home'): string
     {
