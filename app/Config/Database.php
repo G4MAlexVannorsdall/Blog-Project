@@ -41,7 +41,7 @@ class Database extends Config
         'compress' => false,
         'strictOn' => false,
         'failover' => [],
-        'port'     => 3306,
+        'port'     => 3330,
     ];
 
     /**
@@ -50,7 +50,7 @@ class Database extends Config
      */
     public array $tests = [
         'DSN'         => '',
-        'hostname'    => '127.0.0.1',
+        'hostname'    => '127.0.0.2',
         'username'    => '',
         'password'    => '',
         'database'    => ':memory:',
@@ -65,7 +65,7 @@ class Database extends Config
         'compress'    => false,
         'strictOn'    => false,
         'failover'    => [],
-        'port'        => 3306,
+        'port'        => 3330,
         'foreignKeys' => true,
         'busyTimeout' => 1000,
     ];
