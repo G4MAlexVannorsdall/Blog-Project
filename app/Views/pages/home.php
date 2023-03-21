@@ -1,3 +1,7 @@
+<?php
+echo '<script>alert("Welcome to the Blog!")</script>';
+?>
+
 <html lang="en">
 <head>
     <title>Home page</title>
@@ -6,6 +10,6 @@
     <!--<link href="style.css" rel="stylesheet" type="text/css"/>-->
 </head>
 <body>
-    Views/pages/home
+    This is the homepage.
 </body>
 </html>

@@ -1,5 +1,9 @@
+<?php
+
+?>
+
 <!doctype html>
-<html lang="">
+<html lang="en">
 <head>
     <title>Blog</title>
 </head>

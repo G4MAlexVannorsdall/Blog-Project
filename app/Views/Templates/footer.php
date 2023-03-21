@@ -1,3 +1,7 @@
+<?php
+
+?>
+
 <html lang="en">
 <head>
     <title>Footer</title>
@@ -6,6 +10,9 @@
     <!--<link href="style.css" rel="stylesheet" type="text/css"/>-->
 </head>
 <body>
+    <ul>
+        <li><a href="/">Back to the Top</a></li>
+    </ul>
     <em>&copy; Alexandria Vannorsdall 2023</em>
 </body>
 </html>
