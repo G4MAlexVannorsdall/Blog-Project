@@ -11,5 +11,6 @@ echo '<script>alert("Welcome to the Blog!")</script>';
 </head>
 <body>
     This is the homepage.
+<?= $title ?>
 </body>
 </html>

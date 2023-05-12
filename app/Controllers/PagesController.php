@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use CodeIgniter\Exceptions\PageNotFoundException;
 
-class Pages extends BaseController
+class PagesController extends BaseController
 {
     public function index(): string
     {
