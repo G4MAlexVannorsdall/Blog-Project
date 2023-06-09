@@ -12,15 +12,15 @@ class ArticleModel extends Model
     protected $table = 'article';
 
     /**
-     * @param bool $keyword
-     * @return array|object|null
+     * @param bool $title
+     * @return array
      */
-    public function getArticle(bool $keyword = false)
+    public function getArticle(bool $title = false): array
     {
-        if ($keyword === false) {
+        if ($title === false) {
             return $this->findAll();
         }
 
-        return $this->where(['keyword' => $keyword])->first();
+        return $this->where(['title' => $title])->first();
     }
 }

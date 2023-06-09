@@ -1,9 +1,15 @@
+<?php
 
-<h2><?= esc($title) ?></h2>
+use Config\Database;
 
-<?php if (! empty($articles) && is_array($articles)): ?>
+?>
 
-    <?php foreach ($article as $articles): ?>
+<?php
+$db = Database::connect();
+
+if (!empty($db) && is_array($db)): ?>
+
+    <?php foreach ($db as $article): ?>
 
         <h3><?= esc($article['title']) ?></h3>
 
