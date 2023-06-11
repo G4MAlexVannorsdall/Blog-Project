@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Models\ArticleModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
-use Config\Database;
 
 class ArticleController extends BaseController
 {
@@ -15,11 +14,9 @@ class ArticleController extends BaseController
     {
         $model = model(ArticleModel::class);
 
-        $data['article'] = $model->getArticle();
-
         $data = [
-            'article' => $model->getArticle(),
-            'title' => 'Blog post',
+            'article'  => $model->getArticle(),
+            'title' => 'Blog Post',
         ];
 
         return view('templates/header', $data)
@@ -38,12 +35,14 @@ class ArticleController extends BaseController
         $data['article'] = $model->getArticle($keyword);
 
         if (empty($data['article'])) {
-            throw new PageNotFoundException('Cannot find the blog post with this keyword: ' . $keyword);
+            throw new PageNotFoundException('Cannot find the blog post item: ' . $keyword);
         }
 
-        $data['article'] = 'article';
-        $data['title'] = 'title';
+        $data['title'] = $data['article']['title'];
 
-        return view('Views/pages/article/index', $data);
+        return view('templates/header', $data)
+            . view('Views/pages/article/view')
+            . view('templates/footer');
+
     }
 }

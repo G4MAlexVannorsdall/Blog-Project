@@ -1,22 +1,15 @@
-<?php
+<h2><?= esc($title) ?></h2>
 
-use Config\Database;
+<?php if (! empty($article) && is_array($article)): ?>
 
-?>
+    <?php foreach ($article as $post): ?>
 
-<?php
-$db = Database::connect();
-
-if (!empty($db) && is_array($db)): ?>
-
-    <?php foreach ($db as $article): ?>
-
-        <h3><?= esc($article['title']) ?></h3>
+        <h3><?= esc($post['title']) ?></h3>
 
         <div class="main">
-            <?= esc($article['text']) ?>
+            <?= esc($post['text']) ?>
         </div>
-        <p><a href="/article/<?= esc($article['keyword'], 'url') ?>">View article</a></p>
+        <p><a href="/news/<?= esc($post['keyword'], 'url') ?>">View post</a></p>
 
     <?php endforeach ?>
 
@@ -24,6 +17,6 @@ if (!empty($db) && is_array($db)): ?>
 
     <h3>No blog posts</h3>
 
-    <p>Could not find any blog posts for you.</p>
+    <p>Unable to find any news for you.</p>
 
 <?php endif ?>
