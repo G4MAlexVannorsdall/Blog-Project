@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use CodeIgniter\Database\ResultInterface;
 use CodeIgniter\Model;
-use Config\Database;
 
 class ArticleModel extends Model
 {
@@ -13,15 +11,12 @@ class ArticleModel extends Model
      */
     protected $table = 'article';
 
-    /**
-     * @return ResultInterface|false|string
-     */
-    public function getArticle()
+    public function getArticle($keyword = false)
     {
-        $db = Database::connect();
+        if ($keyword === false) {
+            return $this->findAll();
+        }
 
-        $builder = $db->table('article');
-
-        return $builder->get();
+        return $this->where(['Keyword' => $keyword])->first();
     }
 }

@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Models\ArticleModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 
-class ArticleController extends BaseController
+class Article extends BaseController
 {
     /**
      * @return string
@@ -16,11 +16,11 @@ class ArticleController extends BaseController
 
         $data = [
             'article'  => $model->getArticle(),
-            'title' => 'Blog Post',
+            'Title' => 'Posts',
         ];
 
         return view('templates/header', $data)
-            . view('Views/pages/article/index')
+            . view('article/index')
             . view('templates/footer');
     }
 
@@ -28,7 +28,7 @@ class ArticleController extends BaseController
      * @param $keyword
      * @return string
      */
-    public function view($keyword): string
+    public function view($keyword = null): string
     {
         $model = model(ArticleModel::class);
 
@@ -38,10 +38,10 @@ class ArticleController extends BaseController
             throw new PageNotFoundException('Cannot find the blog post item: ' . $keyword);
         }
 
-        $data['title'] = $data['article']['title'];
+        $data['Title'] = $data['article']['Title'];
 
         return view('templates/header', $data)
-            . view('Views/pages/article/view')
+            . view('article/view')
             . view('templates/footer');
 
     }

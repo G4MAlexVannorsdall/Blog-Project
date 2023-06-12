@@ -2,9 +2,9 @@
 
 namespace Config;
 
-use App\Controllers\ArticleController;
-use App\Controllers\HomeController;
-use App\Controllers\PagesController;
+use App\Controllers\Article;
+use App\Controllers\Home;
+use App\Controllers\Pages;
 
 $routes = Services::routes();
 
@@ -32,15 +32,21 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'ArticleController::index');
-//$routes->get('/pages', [PagesController::class, 'index']);
-$routes->get('/home', 'HomeController::index');
+$routes->get('article/(:segment)', [Article::class, 'view']);
+$routes->get('article', [Article::class, 'index']);
+$routes->get('pages', [Pages::class, 'index']);
+$routes->get('(:segment)', [Pages::class, 'view']);
+
+
+//$routes->get('/', 'Article::index');
+//$routes->get('/pages', [Pages::class, 'index']);
+//$routes->get('/home', 'Home::index');
 //$routes->get('(:segment)', [Pages::class, 'view']);
 
-//$routes->get('article', [ArticleController::class, 'view']);
-//$routes->get('news', [ArticleController::class, 'index']);
-//$routes->get('pages', [PagesController::class, 'index']);
-//$routes->get('(:segment)', [PagesController::class, 'view']);
+//$routes->get('article', [Article::class, 'view']);
+//$routes->get('news', [Article::class, 'index']);
+//$routes->get('pages', [Pages::class, 'index']);
+//$routes->get('(:segment)', [Pages::class, 'view']);
 
 /*
  * --------------------------------------------------------------------
