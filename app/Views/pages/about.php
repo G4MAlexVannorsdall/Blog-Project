@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <html lang="en">
 <head>
     <title>About</title>

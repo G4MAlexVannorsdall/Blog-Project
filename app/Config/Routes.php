@@ -2,7 +2,8 @@
 
 namespace Config;
 
-// Create a new instance of our RouteCollection class.
+use App\Controllers\Article;
+use App\Controllers\Home;
 use App\Controllers\Pages;
 
 $routes = Services::routes();
@@ -31,9 +32,21 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->get('article/(:segment)', [Article::class, 'view']);
+$routes->get('article', [Article::class, 'index']);
 $routes->get('pages', [Pages::class, 'index']);
 $routes->get('(:segment)', [Pages::class, 'view']);
+
+
+//$routes->get('/', 'Article::index');
+//$routes->get('/pages', [Pages::class, 'index']);
+//$routes->get('/home', 'Home::index');
+//$routes->get('(:segment)', [Pages::class, 'view']);
+
+//$routes->get('article', [Article::class, 'view']);
+//$routes->get('news', [Article::class, 'index']);
+//$routes->get('pages', [Pages::class, 'index']);
+//$routes->get('(:segment)', [Pages::class, 'view']);
 
 /*
  * --------------------------------------------------------------------
