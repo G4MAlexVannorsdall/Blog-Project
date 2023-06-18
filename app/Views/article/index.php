@@ -9,7 +9,7 @@
         <div class="main">
             <?= esc($anArticle['Text']) ?>
         </div>
-        <p><a href="/article/<?= esc($anArticle['Keyword'], 'url') ?>">View post</a></p>
+        <a href="/article/<?= esc($anArticle['Title'], 'url') ?>"></a>
 
     <?php endforeach ?>
 

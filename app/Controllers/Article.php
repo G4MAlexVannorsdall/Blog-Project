@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\ArticleModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
+use ReflectionException;
 
 class Article extends BaseController
 {
@@ -44,5 +45,47 @@ class Article extends BaseController
             . view('article/view')
             . view('templates/footer');
 
+    }
+
+    /**
+     * @return string
+     * @throws ReflectionException
+     */
+    public function create(): string
+    {
+        helper('form');
+
+        // Checks whether the form is submitted.
+        if (! $this->request->is('post')) {
+            // The form is not submitted, so returns the form.
+            return view('templates/header', ['title' => 'Create a new post'])
+                . view('article/create')
+                . view('templates/footer');
+        }
+
+        $post = $this->request->getPost(['title', 'text']);
+
+        // Checks whether the submitted data passed the validation rules.
+        if (! $this->validateData($post, [
+            'title' => 'required|max_length[255]|min_length[3]',
+            'text'  => 'required|max_length[5000]|min_length[10]',
+        ])) {
+            // The validation fails, so returns the form.
+            return view('templates/header', ['title' => 'Create a new post'])
+                . view('article/create')
+                . view('templates/footer');
+        }
+
+        $model = model(ArticleModel::class);
+
+        $model->save([
+            'title' => $post['title'],
+            'keyword'  => url_title($post['title'], '-', true),
+            'text'  => $post['text'],
+        ]);
+
+        return view('templates/header', ['title' => 'Create a new post'])
+            . view('article/success')
+            . view('templates/footer');
     }
 }
