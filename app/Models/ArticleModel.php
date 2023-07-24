@@ -32,4 +32,22 @@ class ArticleModel extends Model
 
         return $this->where(['Keyword' => $keyword])->first();
     }
+
+    /**
+     * @param int $id
+     * @return true
+     */
+    public function deleteArticle(int $id): bool
+    {
+        $builder = $this->db->table("article");
+        $builder->where("Id", $id);
+        $builder->delete($id);
+
+        $result = $builder->get();
+        if ($result->getNumRows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

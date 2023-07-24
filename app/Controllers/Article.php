@@ -88,4 +88,21 @@ class Article extends BaseController
             . view('article/success')
             . view('templates/footer');
     }
+
+    /**
+     * @param int $id
+     * @return void
+     */
+    public function delete(int $id): void
+    {
+        $model = model(ArticleModel::class);
+
+        $response= $model->deleteArticle($id);
+        if($response){
+            echo "Post deleted!";
+        }
+        else{
+            echo "Your post was not deleted.";
+        }
+    }
 }

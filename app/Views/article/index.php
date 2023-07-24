@@ -10,6 +10,7 @@
             <?= esc($anArticle['Text']) ?>
         </div>
         <a href="/article/<?= esc($anArticle['Title'], 'url') ?>"></a>
+        <a href="/article/delete?id=<?= esc($anArticle['Id'], 'url') ?>">Delete</a>
 
     <?php endforeach ?>
 
