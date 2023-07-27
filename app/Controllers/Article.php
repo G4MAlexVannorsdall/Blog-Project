@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\ArticleModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
+use Exception;
 use ReflectionException;
 
 class Article extends BaseController
@@ -91,18 +92,23 @@ class Article extends BaseController
 
     /**
      * @param int $id
-     * @return void
+     * @return string
+     * @throws Exception
      */
-    public function delete(int $id): void
+    public function delete(int $id): string
     {
         $model = model(ArticleModel::class);
+        $article = $model->find($id);
 
-        $response= $model->deleteArticle($id);
-        if($response){
-            echo "Post deleted!";
+        if($model->delete($id)){
+            $message = "Post deleted!";
         }
         else{
-            echo "Your post was not deleted.";
+            $message = "Your post was not deleted.";
         }
+
+        return view('templates/header')
+            . view('article/view', ['message' => $message, 'article' => $article])
+            . view('templates/footer');
     }
 }

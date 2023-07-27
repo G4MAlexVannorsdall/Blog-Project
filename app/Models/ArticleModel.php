@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use Exception;
+use function PHPUnit\Framework\throwException;
 
 class ArticleModel extends Model
 {
@@ -36,18 +38,18 @@ class ArticleModel extends Model
     /**
      * @param int $id
      * @return true
+     * @throws Exception
      */
-    public function deleteArticle(int $id): bool
+    public function delete($id = null, bool $purge = false): bool
     {
         $builder = $this->db->table("article");
+        $builder->get();
         $builder->where("Id", $id);
-        $builder->delete($id);
 
-        $result = $builder->get();
-        if ($result->getNumRows() > 0) {
-            return true;
-        } else {
-            return false;
+        if ($id === null) {
+            throw new Exception('Id cannot be null.');
         }
+        $builder->delete();
+         return true;
     }
 }
