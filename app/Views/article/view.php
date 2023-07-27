@@ -1,2 +1,2 @@
-<h2><?= esc($article['Title']) ?></h2>
-<p><?= esc($article['Text']) ?></p>
+<h2><?= esc($anArticle['Title']) ?></h2>
+<p><?= esc($anArticle['Text']) ?></p>
