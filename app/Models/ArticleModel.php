@@ -23,6 +23,8 @@ class ArticleModel extends Model
     protected $allowedFields = ['title', 'keyword', 'text'];
 
     /**
+     * Gets the articles of keyword is false, else returns the first article with that keyword.
+     *
      * @param bool $keyword
      * @return array|object|null
      */
@@ -36,6 +38,31 @@ class ArticleModel extends Model
     }
 
     /**
+     * Gets the article if we have the id.
+     *
+     * @throws Exception
+     */
+    public function getArticleName(): string
+    {
+        $id = $this->getById();
+
+        if ($id === null) {
+            throw new Exception('Id cannot be null when trying to find the article name.');
+        }
+
+        $model = model(ArticleModel::class);
+        $article = $model->find($id);
+
+        if ($article === null) {
+            throw new Exception("Article not found with id: $id");
+        }
+
+        return $article['Title'];
+    }
+
+    /**
+     * Finds an article by the id and deletes it if it exists.
+     *
      * @param int $id
      * @return true
      * @throws Exception
@@ -51,5 +78,22 @@ class ArticleModel extends Model
         }
         $builder->delete();
          return true;
+    }
+
+    /**
+     * Retrieves an article by its id.
+     *
+     * @throws Exception
+     */
+    public function getById($id = null)
+    {
+        $builder = $this->db->table('article');
+        $builder->getWhere(array('Id' => $id));
+
+        if ($id === null) {
+            throw new Exception('Id cannot be null.');
+        } else {
+            return $id;
+        }
     }
 }

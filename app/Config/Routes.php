@@ -33,6 +33,8 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->match(['get', 'post'], 'article/create', [Article::class, 'create']);
+$routes->match(['get', 'post'], 'article/edit', [Article::class, 'edit']);
+$routes->match(['get', 'post'], 'article/edit/(:num)', [Article::class, 'edit']);
 $routes->get('article/delete/(:num)', [Article::class, 'delete']);
 $routes->get('article/(:segment)', [Article::class, 'view']);
 $routes->get('article', [Article::class, 'index']);
