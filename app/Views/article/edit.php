@@ -8,14 +8,14 @@
 
     <label for="title">Title</label>
     <label>
-        <input type="text" name="title" value="<?= isset($post['title']) ? esc($post['title']) : '' ?>"/>
+        <input type="text" name="title" value="<?= isset($post['Title']) ? esc($post['Title']) : '' ?>"/>
     </label>
     <br>
     <br>
 
     <label for="body">Text</label>
     <label>
-        <textarea name="text" cols="45" rows="4"><?= isset($post['text']) ? esc($post['text']) : '' ?></textarea>
+        <textarea name="text" cols="45" rows="4"><?= isset($post['Text']) ? esc($post['Text']) : '' ?></textarea>
     </label>
     <br>
     <br>
