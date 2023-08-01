@@ -111,4 +111,54 @@ class Article extends BaseController
             . view('article/view', ['message' => $message, 'article' => $article])
             . view('templates/footer');
     }
+
+    /**
+     * @param int|null $id
+     * @return string
+     * @throws ReflectionException
+     * @throws Exception
+     */
+    public function edit(int $id): string
+    {
+        helper('form');
+
+        $model = model(ArticleModel::class);
+
+        // Fetch the specific article from the database based on the ID.
+        $post = $model->find($id);
+
+        // Check if the post exists.
+        if ($post === null) {
+            // Article not found, return back to the main site.
+            return view('templates/header')
+                . view('article/view')
+                . view('templates/footer');
+        }
+
+        if ($this->request->getPostGet() === 'post') {
+            $submittedData = $this->request->getPost(['title', 'text']);
+
+            // Validate the submitted data.
+            if (!$this->validateData($submittedData, [
+                'title' => 'required|max_length[255]|min_length[3]',
+                'text' => 'required|max_length[5000]|min_length[10]',
+            ])) {
+                // The validation fails, so return the form with the submitted data and the error messages.
+                return view('templates/header')
+                    . view('article/edit', ['post' => $submittedData, 'errors' => $this->validator->getErrors()])
+                    . view('templates/footer');
+            }
+
+            // Update the article data with the submitted values.
+            $model->update($id, [
+                'title' => $submittedData['title'],
+                'keyword' => url_title($submittedData['title'], '-', true),
+                'text' => $submittedData['text'],
+            ]);
+        }
+
+        return view('templates/header', ['title' => 'Edit a post'])
+            . view('article/edit', ['post' => $post])
+            . view('templates/footer');
+    }
 }
